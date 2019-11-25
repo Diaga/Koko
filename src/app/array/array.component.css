@@ -1,0 +1,16 @@
+.array {
+  display: flex;
+  justify-content: center;
+}
+
+.block {
+  background-color: blueviolet;
+  width: 5px;
+  height: 100px;
+  margin-left: 1px;
+  margin-right: 1px;
+}
+
+.flex {
+  display: flex;
+}

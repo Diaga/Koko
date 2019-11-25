@@ -1,0 +1,5 @@
+<div class="array" (click)="bubbleSort(randomArray)">
+  <span *ngFor="let number of range" [id]="'block' + number" [ngStyle]="{'order': randomArray[number] / 250}">
+    <div class="block" [ngStyle]="{'height.px': randomArray[number], 'background-color': randomColor[number]}"></div>
+  </span>
+</div>
