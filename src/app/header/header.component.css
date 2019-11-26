@@ -1,0 +1,20 @@
+.header {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.select-algo {
+  width: 150px;
+}
+
+.slider {
+  width: 100px;
+}
+
+.divider {
+  margin-left: 50px;
+  margin-right: 50px;
+  width: 2px;
+  background-color: grey;
+  height: 50px;
+}

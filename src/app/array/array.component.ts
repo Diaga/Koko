@@ -1,4 +1,5 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ArrayService} from './array.service';
 
 @Component({
   selector: 'app-array',
@@ -6,34 +7,29 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
   styleUrls: ['./array.component.css']
 })
 export class ArrayComponent implements OnInit {
+  arrayService: ArrayService;
 
-  length = 100;
-  randomArray = Array(this.length).fill(0).map(() => Math.round(Math.random() * 250) + 1);
-  randomOrder = Array(this.length).fill(0).map(() => Math.round(Math.random() * this.length));
-  randomColor = Array(this.length).fill('blueviolet');
-  range = Array(this.length).fill(0).map((x, i) => x = i);
-  constructor() {
+  constructor(arrayService: ArrayService) {
+    this.arrayService = arrayService;
   }
 
   ngOnInit() {
   }
-  delay(ms: number) {
-    return new Promise( resolve => setTimeout(resolve, ms) );
-  }
+
   async bubbleSort(array) {
     for (let i = array.length; i >= 0; i--) {
       for (let j = 0; j < i; j++) {
-        this.randomColor[j] = 'yellow';
+        this.arrayService.randomColor[j] = 'yellow';
         if (array[j] > array[j + 1]) {
-          this.randomColor[j + 1] = 'red';
-          await this.delay(10);
+          this.arrayService.randomColor[j + 1] = 'red';
+          await this.arrayService.delay();
           const swap = array[j];
           array[j] = array[j + 1];
           array[j + 1] = swap;
+          this.arrayService.randomColor.fill('blueviolet', 0, i - 1);
         }
-        this.randomColor.fill('blueviolet', 0, i - 1);
+        this.arrayService.randomColor[i - 1] = 'green';
       }
-      this.randomColor[i - 1] = 'green';
     }
   }
 

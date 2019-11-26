@@ -1,0 +1,12 @@
+<mat-toolbar class="flex header">
+  <mat-select [(value)]="currentSortValue" class="select-algo"
+              (valueChange)="arrayService.setCurrentSort(currentSortValue)">
+    <mat-option *ngFor="let sortAlgo of arrayService.sortAlgorithms" [value]="sortAlgo.value">
+      {{sortAlgo.name}}
+    </mat-option>
+  </mat-select>
+  <div class="divider"></div>
+  <mat-slider [(value)]="arraySize" min="1" [max]="innerWidth / 20"
+              (valueChange)="arrayService.setArraySize(arraySize * 3)" step="1"
+              class="slider"></mat-slider>
+</mat-toolbar>
