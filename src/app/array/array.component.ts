@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ArrayService} from './array.service';
+import {ArrayService} from './services/array/array.service';
+import {SortService} from './services/sort/sort.service';
 
 @Component({
   selector: 'app-array',
@@ -8,29 +9,13 @@ import {ArrayService} from './array.service';
 })
 export class ArrayComponent implements OnInit {
   arrayService: ArrayService;
+  sortService: SortService;
 
-  constructor(arrayService: ArrayService) {
+  constructor(arrayService: ArrayService, sortService: SortService) {
     this.arrayService = arrayService;
+    this.sortService = sortService;
   }
 
   ngOnInit() {
   }
-
-  async bubbleSort(array) {
-    for (let i = array.length; i >= 0; i--) {
-      for (let j = 0; j < i; j++) {
-        this.arrayService.randomColor[j] = 'yellow';
-        if (array[j] > array[j + 1]) {
-          this.arrayService.randomColor[j + 1] = 'red';
-          await this.arrayService.delay();
-          const swap = array[j];
-          array[j] = array[j + 1];
-          array[j + 1] = swap;
-          this.arrayService.randomColor.fill('blueviolet', 0, i - 1);
-        }
-        this.arrayService.randomColor[i - 1] = 'green';
-      }
-    }
-  }
-
 }

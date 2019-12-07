@@ -1,5 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {ArrayService} from '../array/array.service';
+import {ArrayService} from '../array/services/array/array.service';
+import {SortService} from '../array/services/sort/sort.service';
+import {Sort} from '@angular/material';
 
 @Component({
   selector: 'app-header',
@@ -12,7 +14,9 @@ export class HeaderComponent implements OnInit {
   currentSortValue = 0;
   arraySize = 1;
   arrayService: ArrayService;
-  constructor(arrayService: ArrayService) {
+  sortService: SortService;
+  constructor(arrayService: ArrayService, sortService: SortService) {
+    this.sortService = sortService;
     this.arrayService = arrayService;
     this.arrayService.setCurrentSort(this.currentSortValue);
     this.arrayService.setArraySize(this.arraySize * 3);

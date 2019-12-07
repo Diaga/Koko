@@ -1,7 +1,9 @@
-<div class="array" (click)="bubbleSort(arrayService.randomArray)">
+<div class="array">
   <span *ngFor="let number of arrayService.range" [id]="'block' + number"
-        [ngStyle]="{'order': arrayService.randomArray[number] / 250}">
+        [ngStyle]="{'order': number}">
     <div class="block"
-         [ngStyle]="{'height.px': arrayService.randomArray[number], 'background-color': arrayService.randomColor[number]}"></div>
+         [ngStyle]="{'height.px': arrayService.randomArray[number], 'background-color': arrayService.randomColor[number],
+         'width.px': 70 - arrayService.randomArray.length > 0 ? 70 - arrayService.randomArray.length :
+         (100 - arrayService.randomArray.length > 0 ? arrayService.randomArray.length / 10 : arrayService.randomArray.length / 15)}"></div>
   </span>
 </div>

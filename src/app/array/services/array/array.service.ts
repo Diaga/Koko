@@ -1,5 +1,4 @@
-import {HostListener, Injectable} from '@angular/core';
-import {Sort} from '@angular/material';
+import {Injectable} from '@angular/core';
 
 export interface SortAlgorithm {
   value: number;
@@ -11,7 +10,6 @@ export interface SortAlgorithm {
 })
 export class ArrayService {
 
-
   arraySize: number; // Controls array size
   delayTime: number; // Delay time for animations
   randomArray: number[]; // Holds random values to be sorted
@@ -22,23 +20,27 @@ export class ArrayService {
   sortAlgorithms: SortAlgorithm[] = [
     {value: 0, name: 'BubbleSort'},
   ];
+
   constructor() {
-    this.setArraySize(100);
   }
+
   private defineArrays() {
     this.randomArray = Array(this.arraySize).fill(0).map(() => Math.round(Math.random() * 250) + 1);
-    this.randomOrder = Array(this.arraySize).fill(0).map(() => Math.round(Math.random() * this.arraySize));
+    this.randomOrder = Array(this.arraySize).fill(0).map((x, i) => x = i).sort(() => Math.random() - 0.5);
     this.randomColor = Array(this.arraySize).fill('blueviolet');
     this.range = Array(this.arraySize).fill(0).map((x, i) => x = i);
   }
+
   setArraySize(arraySize: number) {
     this.arraySize = arraySize;
-    this.delayTime = Math.floor(arraySize / 10);
+    this.delayTime = Math.floor((arraySize + 500) / (arraySize));
     this.defineArrays();
   }
+
   delay() {
     return new Promise(resolve => setTimeout(resolve, this.delayTime));
   }
+
   setCurrentSort(value: number) {
     this.currentSort = this.sortAlgorithms.find(ele => ele.value === value);
   }

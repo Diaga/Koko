@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { ArrayComponent } from './array/array.component';
 import { HeaderComponent } from './header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatSliderModule, MatToolbarModule, MatSelectModule} from '@angular/material';
+import {MatSliderModule, MatToolbarModule, MatSelectModule, MatButtonModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -13,13 +13,14 @@ import {MatSliderModule, MatToolbarModule, MatSelectModule} from '@angular/mater
     ArrayComponent,
     HeaderComponent,
   ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatSliderModule,
-    MatSelectModule
-  ],
+    imports: [
+        BrowserModule,
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatSliderModule,
+        MatSelectModule,
+        MatButtonModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

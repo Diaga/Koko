@@ -1,6 +1,13 @@
 .header {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.header-left-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .select-algo {
@@ -17,4 +24,8 @@
   width: 2px;
   background-color: grey;
   height: 50px;
+}
+
+.go-button {
+  justify-self: end;
 }
