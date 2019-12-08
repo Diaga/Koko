@@ -19,6 +19,7 @@ export class ArrayService {
   currentSort: SortAlgorithm; // Current algorithm being called
   sortAlgorithms: SortAlgorithm[] = [
     {value: 0, name: 'BubbleSort'},
+    {value: 1, name: 'SelectionSort'}
   ];
 
   constructor() {
