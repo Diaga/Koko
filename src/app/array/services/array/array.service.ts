@@ -19,7 +19,9 @@ export class ArrayService {
   currentSort: SortAlgorithm; // Current algorithm being called
   sortAlgorithms: SortAlgorithm[] = [
     {value: 0, name: 'BubbleSort'},
-    {value: 1, name: 'SelectionSort'}
+    {value: 1, name: 'SelectionSort'},
+    {value: 2, name: 'MergeSort'},
+    {value: 3, name: 'QuickSort'}
   ];
 
   constructor() {
@@ -27,7 +29,6 @@ export class ArrayService {
 
   private defineArrays() {
     this.randomArray = Array(this.arraySize).fill(0).map(() => Math.round(Math.random() * 250) + 1);
-    this.randomOrder = Array(this.arraySize).fill(0).map((x, i) => x = i).sort(() => Math.random() - 0.5);
     this.randomColor = Array(this.arraySize).fill('blueviolet');
     this.range = Array(this.arraySize).fill(0).map((x, i) => x = i);
   }

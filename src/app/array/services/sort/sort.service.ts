@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {ArrayService} from '../array/array.service';
-import {min} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +20,9 @@ export class SortService {
       await this.bubbleSort(array);
     } else if (this.arrayService.currentSort.value === 1) {
       await this.selectionSort(array);
+    } else if (this.arrayService.currentSort.value === 2) {
+      await this.mergeSort(array);
+      this.arrayService.randomColor.fill('green');
     }
     this.isSorting = false;
   }
@@ -41,6 +43,7 @@ export class SortService {
       this.arrayService.randomColor.fill('green', array.length - i - 1);
     }
   }
+
   async selectionSort(array) {
     for (let i = 0; i < array.length; i++) {
       let minIndex = i;
@@ -57,6 +60,39 @@ export class SortService {
       array[minIndex] = array[i];
       array[i] = temp;
       this.arrayService.randomColor[i] = 'green';
+    }
+  }
+
+  async mergeSort(array, startIndex = 0, endIndex = array.length) {
+    if ((endIndex - startIndex) > 1) {
+      const middleIndex = Math.floor((startIndex + endIndex) / 2);
+      await this.mergeSort(array, startIndex, middleIndex);
+      await this.mergeSort(array, middleIndex, endIndex);
+      await this.merge(array, startIndex, middleIndex, endIndex);
+    }
+    this.arrayService.randomColor.fill('blueviolet');
+  }
+
+  private async merge(array, startIndex, middleIndex, endIndex) {
+    const leftArray = array.slice(startIndex, middleIndex);
+    const rightArray = array.slice(middleIndex, endIndex);
+    this.arrayService.randomColor.fill('yellow', startIndex, middleIndex);
+    this.arrayService.randomColor.fill('red', middleIndex, endIndex);
+
+    let i = 0;
+    let j = 0;
+    const k = startIndex;
+    for (let l = startIndex; l < endIndex; l++) {
+      await this.arrayService.delay().then();
+      await this.arrayService.delay().then();
+      await this.arrayService.delay().then();
+      if (j >= rightArray.length || (i < leftArray.length && leftArray[i] < rightArray[j])) {
+        array[l] = leftArray[i];
+        i++;
+      } else {
+        array[l] = rightArray[j];
+        j++;
+      }
     }
   }
 }
