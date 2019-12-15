@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ArrayService} from '../array/array.service';
+import {max} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,10 @@ export class SortService {
     } else if (this.arrayService.currentSort.value === 2) {
       await this.mergeSort(array);
       this.arrayService.randomColor.fill('green');
+    } else if (this.arrayService.currentSort.value === 3) {
+      await this.quickSort(array);
+    } else if (this.arrayService.currentSort.value === 4) {
+      await this.heapSort(array);
     }
     this.isSorting = false;
   }
@@ -95,45 +100,80 @@ export class SortService {
       }
     }
   }
-  function partition(array: Array<number>, left: number = 0, right: number = array.length - 1) {
-  const pivot = array[Math.floor((right + left) / 2)];
-  let i = left;
-  let j = right;
 
-  while (i <= j) {
-    while (array[i] < pivot) {
-      i++;
+  async partition(array: Array<number>, left: number = 0, right: number = array.length - 1) {
+    const pivot = array[left];
+
+    let i = left;
+    let j = right;
+
+    while (i <= j) {
+      while (array[i] < pivot) {
+        i++;
+      }
+
+      while (array[j] > pivot) {
+        j--;
+      }
+
+      if (i <= j) {
+        [array[i], array[j]] = [array[j], array[i]];
+        i++;
+        j--;
+      }
     }
+    return i;
+  }
 
-    while (array[j] > pivot) {
-      j--;
+  async quickSort(array: Array<number>, left: number = 0, right: number = array.length - 1) {
+    let index;
+
+    if (array.length > 1) {
+      index = await this.partition(array, left, right);
+
+      if (left < index - 1) {
+        await this.quickSort(array, left, index - 1);
+      }
+
+      if (index < right) {
+        await this.quickSort(array, index, right);
+      }
     }
+    return array;
+  }
 
-    if (i <= j) {
-      [array[i], array[j]] = [array[j], array[i]];
-      i++;
-      j--;
+  async shiftDown(array: Array<number>, i: number, j: number) {
+    let done = false;
+    let maxChild: number;
+
+    while ((i * 2 + 1 < j) && !done) {
+      if (i * 2 + 1 === j - 1) {
+        maxChild = i * 2 + 1;
+      } else if (array[i * 2 + 1] > array[i * 2 + 2]) {
+        maxChild = i * 2 + 1;
+      } else {
+        maxChild = i * 2 + 2;
+      }
+
+      if (array[i] < array[maxChild]) {
+        [array[i], array[maxChild]] = [array[maxChild], array[i]];
+        i = maxChild;
+      } else {
+        done = true;
+      }
     }
   }
 
-  return i;
-}
+  async heapSort(array: Array<number>) {
 
-function quickSort(array: Array<number>, left: number = 0, right: number = array.length - 1) {
-  let index;
-
-  if (array.length > 1) {
-    index = partition(array, left, right);
-
-    if (left < index - 1) {
-      quickSort(array, left, index - 1);
+    for (let i: number = Math.floor(array.length / 2 - 1); i >= 0; i--) {
+      await this.shiftDown(array, i, array.length);
     }
 
-    if (index < right) {
-      quickSort(array, index, right);
+    for (let i: number = array.length - 1; i >= 1; i--) {
+      [array[0], array[i]] = [array[i], array[0]];
+      await this.shiftDown(array, 0, i);
     }
+    return array;
   }
-
-  return array;
-}
 }

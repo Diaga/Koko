@@ -13,7 +13,6 @@ export class ArrayService {
   arraySize: number; // Controls array size
   delayTime: number; // Delay time for animations
   randomArray: number[]; // Holds random values to be sorted
-  randomOrder: number[]; // Maps to the flex order property
   randomColor: string[]; // Maps to the background-color property
   range: number[]; // Defines a list of integers from 0 to arraySize
   currentSort: SortAlgorithm; // Current algorithm being called
@@ -21,7 +20,8 @@ export class ArrayService {
     {value: 0, name: 'BubbleSort'},
     {value: 1, name: 'SelectionSort'},
     {value: 2, name: 'MergeSort'},
-    {value: 3, name: 'QuickSort'}
+    {value: 3, name: 'QuickSort'},
+    {value: 4, name: 'HeapSort'}
   ];
 
   constructor() {
@@ -35,7 +35,7 @@ export class ArrayService {
 
   setArraySize(arraySize: number) {
     this.arraySize = arraySize;
-    this.delayTime = Math.floor((arraySize + 500) / (arraySize));
+    this.delayTime = Math.floor((arraySize + 1000) / (arraySize));
     this.defineArrays();
   }
 
