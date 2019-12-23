@@ -19,9 +19,10 @@ export class ArrayService {
   sortAlgorithms: SortAlgorithm[] = [
     {value: 0, name: 'BubbleSort'},
     {value: 1, name: 'SelectionSort'},
-    {value: 2, name: 'MergeSort'},
-    {value: 3, name: 'QuickSort'},
-    {value: 4, name: 'HeapSort'}
+    {value: 2, name: ' InsertionSort'},
+    {value: 3, name: 'MergeSort'},
+    {value: 4, name: 'QuickSort'},
+    {value: 5, name: 'HeapSort'}
   ];
 
   constructor() {

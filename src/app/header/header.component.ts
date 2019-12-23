@@ -1,7 +1,7 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {ArrayService} from '../array/services/array/array.service';
 import {SortService} from '../array/services/sort/sort.service';
-import {Sort} from '@angular/material';
+// import {Sort} from '@angular/material';
 
 @Component({
   selector: 'app-header',

@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ArrayService} from '../array/array.service';
-import {max} from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,11 +22,13 @@ export class SortService {
     } else if (this.arrayService.currentSort.value === 1) {
       await this.selectionSort(array);
     } else if (this.arrayService.currentSort.value === 2) {
+      await this.insertionSort(array, array.length);
+    } else if (this.arrayService.currentSort.value === 3) {
       await this.mergeSort(array);
       this.arrayService.randomColor.fill('green');
-    } else if (this.arrayService.currentSort.value === 3) {
-      await this.quickSort(array);
     } else if (this.arrayService.currentSort.value === 4) {
+      await this.quickSort(array);
+    } else if (this.arrayService.currentSort.value === 5) {
       await this.heapSort(array);
     }
     this.isSorting = false;
@@ -83,10 +85,8 @@ export class SortService {
     const rightArray = array.slice(middleIndex, endIndex);
     this.arrayService.randomColor.fill('yellow', startIndex, middleIndex);
     this.arrayService.randomColor.fill('red', middleIndex, endIndex);
-
     let i = 0;
     let j = 0;
-    const k = startIndex;
     for (let l = startIndex; l < endIndex; l++) {
       await this.arrayService.delay().then();
       await this.arrayService.delay().then();
@@ -106,17 +106,19 @@ export class SortService {
 
     let i = left;
     let j = right;
-
     while (i <= j) {
       while (array[i] < pivot) {
+        await this.arrayService.delay().then();
         i++;
       }
-
       while (array[j] > pivot) {
+        await this.arrayService.delay().then();
         j--;
       }
-
       if (i <= j) {
+        await this.arrayService.delay().then();
+        await this.arrayService.delay().then();
+        await this.arrayService.delay().then();
         [array[i], array[j]] = [array[j], array[i]];
         i++;
         j--;
@@ -130,7 +132,7 @@ export class SortService {
 
     if (array.length > 1) {
       index = await this.partition(array, left, right);
-
+      this.arrayService.randomColor[index] = 'violet';
       if (left < index - 1) {
         await this.quickSort(array, left, index - 1);
       }
@@ -139,6 +141,7 @@ export class SortService {
         await this.quickSort(array, index, right);
       }
     }
+
     return array;
   }
 
@@ -175,5 +178,24 @@ export class SortService {
       await this.shiftDown(array, 0, i);
     }
     return array;
+  }
+
+  async insertionSort(arr: Array<number>, n: number) {
+    // tslint:disable-next-line:one-variable-per-declaration
+    let i, key, j;
+    for (i = 1; i < n; i++) {
+      key = arr[i];
+      j = i - 1;
+      while (j >= 0 && arr[j] > key) {
+        await this.arrayService.delay().then();
+        await this.arrayService.delay().then();
+        await this.arrayService.delay().then();
+        this.arrayService.randomColor[j] = 'blue';
+        arr[j + 1] = arr[j];
+        j = j - 1;
+      }
+      arr[j + 1] = key;
+    }
+    console.log(arr);
   }
 }
