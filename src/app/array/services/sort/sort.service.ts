@@ -186,7 +186,7 @@ export class SortService {
         await this.arrayService.delay().then();
         await this.arrayService.delay().then();
         await this.arrayService.delay().then();
-        this.arrayService.randomColor[j] = 'blue';
+        this.arrayService.randomColor[j] = 'black';
         arr[j + 1] = arr[j];
         j = j - 1;
       }
