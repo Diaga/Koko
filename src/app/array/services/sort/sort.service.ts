@@ -192,6 +192,5 @@ export class SortService {
       }
       arr[j + 1] = key;
     }
-    console.log(arr);
   }
 }

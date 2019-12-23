@@ -1,6 +1,7 @@
 .over-grid {
   display: grid;
-  grid-template-rows: max-content 1fr;
+  grid-template-rows: max-content auto;
+  height: 90%;
 }
 
 .over-grid app-array {
