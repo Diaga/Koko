@@ -1,0 +1,16 @@
+.over-grid {
+  display: grid;
+  grid-template-rows: max-content 1fr;
+}
+
+.over-grid app-array {
+  grid-row-start: 1;
+}
+
+.over-grid app-legend {
+  grid-row-start: 2;
+}
+
+.over-grid app-legend {
+  align-self: flex-end;
+}

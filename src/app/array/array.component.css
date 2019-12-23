@@ -3,6 +3,10 @@
   justify-content: center;
 }
 
+.over-flex {
+  display: flex;
+}
+
 .block {
   background-color: blueviolet;
   width: 5px;

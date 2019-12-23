@@ -8,12 +8,8 @@ import {SortService} from './services/sort/sort.service';
   styleUrls: ['./array.component.css']
 })
 export class ArrayComponent implements OnInit {
-  arrayService: ArrayService;
-  sortService: SortService;
 
-  constructor(arrayService: ArrayService, sortService: SortService) {
-    this.arrayService = arrayService;
-    this.sortService = sortService;
+  constructor(private arrayService: ArrayService, private sortService: SortService) {
   }
 
   ngOnInit() {

@@ -1,17 +1,13 @@
 import {Injectable} from '@angular/core';
 import {ArrayService} from '../array/array.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
 export class SortService {
-
-  arrayService: ArrayService;
   isSorting = false;
 
-  constructor(arrayService: ArrayService) {
-    this.arrayService = arrayService;
+  constructor(private arrayService: ArrayService) {
   }
 
   async sort(array) {
